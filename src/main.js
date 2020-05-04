@@ -16,7 +16,8 @@ import 'quill/dist/quill.bubble.css'
 import WebIM from './webim'
 Vue.use(WebIM)
 Vue.use(VueQuillEditor)
-axios.defaults.baseURL = 'http://106.52.251.50:8080/api/private/v1/'
+// axios.defaults.baseURL = 'http://106.52.251.50:8080/api/private/v1/'
+axios.defaults.baseURL = 'http://timemeetyou.com:8889/api/private/v1/'
 // 请求拦截，为请求头加上Authorization字段提供token令牌
 axios.interceptors.request.use(config => {
   config.headers.Authorization = window.sessionStorage.getItem('token')
