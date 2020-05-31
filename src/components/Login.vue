@@ -14,16 +14,20 @@
         label-width="0px"
         class="login_form"
       >
-        <span class="moren">默认账户:5555,密码:5555</span>
+        <span class="moren" v-if="!isRegister">默认账户:5555,密码:5555</span>
+        <span class="moren" v-else>
+          <!-- <el-form-item v-show="isRegister" prop="nickname">
+          <el-input placeholder="昵称" v-model.trim="form.nickname"></el-input>
+        </el-form-item> -->
+        注册页面
+        </span>
         <el-form-item prop="username">
-          <el-input v-model="form.username" prefix-icon="iconfont icon-users"></el-input>
+          <el-input v-model="form.username" placeholder="用户名" prefix-icon="iconfont icon-users"></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="form.password" prefix-icon="iconfont icon-lock_fill" type="password"></el-input>
+          <el-input v-model="form.password" placeholder="密码" prefix-icon="iconfont icon-lock_fill" type="password"></el-input>
         </el-form-item>
-        <el-form-item v-show="isRegister" prop="nickname">
-          <el-input placeholder="昵称" v-model.trim="form.nickname"></el-input>
-        </el-form-item>
+        
         <el-form-item class="btns">
           <el-button type="primary" @click="onSubmit">{{isRegister ? '注册': '登录'}}</el-button>
           <el-button type="info" @click="resetLoginForm">取消</el-button>
@@ -46,7 +50,7 @@ export default {
       form: {
         username: "",
         password: "",
-        nickname: ""
+        nickname: "管理员"
       },
       loginFromRules: {
         username: [
@@ -84,25 +88,32 @@ export default {
     onSubmit() {
       this.$refs.form.validate(valid => {
         if (valid) {
-          this.login();
           if (this.isRegister) {
             // 注册
             this.registerUser(this.form)
               .then(() => {
-                this.onLogin(this.form)
+                // this.onLogin(this.form);
                 this.$message.success("注册成功");
+
               })
               .then(() => {
-                this.$router.push("/home");
-                this.$message.success("登录成功，欢迎您");
+                // this.login();
+                // setTimeout(() => {
+                //   this.$router.push("/home");
+                //   this.$message.success("登录成功，欢迎您");
+                // }, 1000);
+                this.$router.push("/login");
               });
           } else {
             this.onLogin(this.form).then(res => {
               if (res == 666) {
                 this.$message.error("账户或密码错误");
               } else {
-                this.$router.push("/home");
-                this.$message.success("登录成功，欢迎您");
+                this.login();
+                setTimeout(() => {
+                  this.$router.push("/home");
+                  this.$message.success("登录成功，欢迎您");
+                }, 1000);
               }
             });
           }
@@ -115,10 +126,10 @@ export default {
       this.$http
         .post("login", {
           username: "admin",
-          password: '123456'
+          password: "123456"
         })
         .then(res => {
-           window.sessionStorage.setItem('token',res.data.data.token)
+          window.sessionStorage.setItem("token", res.data.data.token);
         });
     }
   }

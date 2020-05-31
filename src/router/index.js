@@ -44,10 +44,17 @@ const router = new Router({
 
 // 挂载路由导航守卫
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login'||'/register') return next()
+  if (to.path == '/login' || to.path =='/register') {
+    console.log('k')
+    next()
+    return
+  }
   // 获取token
   const tokenStr = window.sessionStorage.getItem('token')
-  if (!tokenStr) return next('/login')
+  if (!tokenStr) {
+    next('/login')
+    return
+  }
   next()
 })
 

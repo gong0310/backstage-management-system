@@ -8,10 +8,10 @@
     <el-card>
       <el-row>
         <el-col :span="8">
-          <!-- 搜索框 -->
+          <!-- 搜索框
           <el-input placeholder="请输入内容">
             <el-button slot="append" icon="el-icon-search"></el-button>
-          </el-input>
+          </el-input> -->
         </el-col>
       </el-row>
 
@@ -139,7 +139,7 @@ export default {
     },
     // 展示物流信息  对话框
     async showProgressBox() {
-      const { data: res } = await this.$http.get('/kuaidi/804909574412544580')
+      const { data: res } = await this.$http.get('/kuaidi/1106975712662')
       if (res.meta.status !== 200) {
         return this.$message.error('获取物流进度失败！')
       }

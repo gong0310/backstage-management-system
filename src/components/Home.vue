@@ -78,7 +78,7 @@ export default {
     async getMenuList () {
       const { data: res } = await this.$http.get('menus')
       // console.log(res)
-      if (res.meta.status !== 200) return this.$message.error('网络出错,刷新试试')
+      if (res.meta.status !== 200) return this.$message.error('请登录')
       this.menulist = res.data.slice(0,-1)
     },
     toggle () {
