@@ -1,5 +1,6 @@
 # backstage-management-system
 **后台管理系统**  
+[预览](http://106.52.251.50:9528/admin/#/login)  
 功能展示:
 - [x] 登录/注册/退出登录
 - [x] 全局路由守卫
